@@ -36,24 +36,24 @@ export function ChatPanel({
 
   const exampleMessages = [
     {
-      heading: 'What are the',
-      subheading: 'trending memecoins today?',
-      message: `What are the trending memecoins today?`
+      heading: 'Siapa Kepala Program Studi',
+      subheading: 'Teknik Informatika?',
+      message: `Siapa Kepala Program Studi Teknik Informatika ITG?`
     },
     {
-      heading: 'What is the price of',
-      subheading: '$DOGE right now?',
-      message: 'What is the price of $DOGE right now?'
+      heading: 'Berapa NIDN',
+      subheading: 'Bu Leni Fitriani?',
+      message: 'Berapa NIDN Bu Leni Fitriani?'
     },
     {
-      heading: 'I would like to buy',
-      subheading: '42 $DOGE',
-      message: `I would like to buy 42 $DOGE`
+      heading: 'Bagaimana cara daftar',
+      subheading: 'mahasiswa baru secara offline di ITG?',
+      message: `Bagaimana cara daftar mahasiswa baru secara offline di ITG?`
     },
     {
-      heading: 'What are some',
-      subheading: `recent events about $DOGE?`,
-      message: `What are some recent events about $DOGE?`
+      heading: 'Kapan Ujian Akhir Semester (UAS)',
+      subheading: `dimulai untuk Semester Genap?`,
+      message: `Kapan Ujian Akhir Semester (UAS) dimulai untuk Semester Genap?`
     }
   ]
 

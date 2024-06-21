@@ -10,6 +10,7 @@ import remarkMath from 'remark-math'
 import { StreamableValue, useStreamableValue } from 'ai/rsc'
 import { useStreamableText } from '@/lib/hooks/use-streamable-text'
 import { TypeAnimation } from 'react-type-animation'
+import Image from 'next/image'
 
 // Different types of message bubbles.
 
@@ -38,7 +39,12 @@ export function BotMessage({
   return (
     <div className={cn('group relative flex items-start md:-ml-12', className)}>
       <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-primary text-primary-foreground shadow-sm">
-        <IconOpenAI />
+        <Image
+          src="/images/gita-logo.png"
+          width={30}
+          height={30}
+          alt="GITA LOGO"
+        />
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         {/* <MemoizedReactMarkdown
@@ -86,7 +92,7 @@ export function BotMessage({
           cursor={false}
           style={{ whiteSpace: 'pre-line', display: 'block' }}
           sequence={[text]}
-          speed={50}
+          speed={80}
         />
       </div>
     </div>
