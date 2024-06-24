@@ -8,7 +8,7 @@ import { useActions, useUIState } from 'ai/rsc'
 import { BotMessage, UserMessage } from './stocks/message'
 import { type AI } from '@/lib/chat/actions'
 import { Button } from '@/components/ui/button'
-import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
+import { IconArrowElbow, IconLoading, IconPlus } from '@/components/ui/icons'
 import {
   Tooltip,
   TooltipContent,
@@ -21,10 +21,14 @@ import { getResponse } from '@/services/chatbot'
 
 export function PromptForm({
   input,
-  setInput
+  setInput,
+  isGetResponse,
+  handleGetResponse
 }: {
   input: string
   setInput: (value: string) => void
+  isGetResponse?: boolean
+  handleGetResponse: (question: string) => void
 }) {
   const router = useRouter()
   const { formRef, onKeyDown } = useEnterSubmit()
@@ -43,35 +47,26 @@ export function PromptForm({
       onSubmit={async (e: any) => {
         e.preventDefault()
 
-        // Blur focus on mobile
-        if (window.innerWidth < 600) {
-          e.target['message']?.blur()
-        }
-
-        const value = input.trim()
-        setInput('')
-        if (!value) return
-
-        // Optimistically add user message UI
-        setMessages(currentMessages => [
-          ...currentMessages,
-          {
-            id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>
+        if (!isGetResponse) {
+          // Blur focus on mobile
+          if (window.innerWidth < 600) {
+            e.target['message']?.blur()
           }
-        ])
 
-        const responseMessage = await getResponse(value)
-        if (!responseMessage.error) {
+          const value = input.trim()
+          setInput('')
+          if (!value) return
+
+          // Optimistically add user message UI
           setMessages(currentMessages => [
             ...currentMessages,
             {
               id: nanoid(),
-              display: (
-                <BotMessage content={responseMessage.data.data.response} />
-              )
+              display: <UserMessage>{value}</UserMessage>
             }
           ])
+
+          handleGetResponse(value)
         }
       }}
     >
@@ -110,9 +105,19 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
-                <IconArrowElbow />
-                <span className="sr-only">Send message</span>
+              <Button
+                type="submit"
+                size="icon"
+                disabled={input === '' || isGetResponse}
+              >
+                {isGetResponse ? (
+                  <IconLoading />
+                ) : (
+                  <>
+                    <IconArrowElbow />
+                    <span className="sr-only">Send message</span>
+                  </>
+                )}
               </Button>
             </TooltipTrigger>
             <TooltipContent>Send message</TooltipContent>

@@ -476,6 +476,31 @@ function IconChevronUpDown({
   )
 }
 
+function IconLoading({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="none"
+      className={cn('size-4', className)}
+      {...props}
+    >
+      <circle cx="128" cy="128" r="96" stroke="currentColor" strokeWidth="16" />
+      <path
+        d="M128 32a96 96 0 0 1 96 96"
+        stroke="currentColor"
+        strokeWidth="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        style={{
+          animation: 'rotate 1s linear infinite'
+        }}
+      />
+    </svg>
+  )
+}
+
 export {
   IconEdit,
   IconNextChat,
@@ -503,5 +528,6 @@ export {
   IconShare,
   IconUsers,
   IconExternalLink,
-  IconChevronUpDown
+  IconChevronUpDown,
+  IconLoading
 }
